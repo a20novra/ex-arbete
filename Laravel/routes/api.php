@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('/flightdata/{id}', [FlightdataController::class, 'show']);
+Route::get('/flightdata', [FlightdataController::class, 'index']);
