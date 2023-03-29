@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Flightdata;
 
 class FlightdataController extends Controller
 {
@@ -45,7 +46,15 @@ class FlightdataController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $flightdata = Flightdata::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Record not found'
+            ], 404);
+        }
+
+        return response()->json($flightdata);
     }
 
     /**
