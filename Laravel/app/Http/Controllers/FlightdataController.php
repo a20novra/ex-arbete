@@ -36,7 +36,35 @@ class FlightdataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'airline_iata_code' => 'required|max:3',
+            'airline_id' => 'required|integer',
+            'source_airport_iata_code' => 'required|max:4',
+            'source_airport_id' => 'required|integer',
+            'destination_airport_iata_code' => 'required|max:4',
+            'destination_airport_id' => 'required|integer',
+            'number_of_stops' => 'required|integer',
+            'equipment' => 'required|max:32'
+        ]);
+
+        // Create a new Flightdata instance with validated data
+        $flightdata = new Flightdata([
+            'airline_iata_code' => $validatedData['airline_iata_code'],
+            'airline_id' => $validatedData['airline_id'],
+            'source_airport_iata_code' => $validatedData['source_airport_iata_code'],
+            'source_airport_id' => $validatedData['source_airport_id'],
+            'destination_airport_iata_code' => $validatedData['destination_airport_iata_code'],
+            'destination_airport_id' => $validatedData['destination_airport_id'],
+            'number_of_stops' => $validatedData['number_of_stops'],
+            'equipment' => $validatedData['equipment']
+        ]);
+
+        // Save the new Flightdata instance to the database
+        $flightdata->save();
+
+        // Return a response indicating success
+        return response()->json(['message' => 'Flight data saved successfully'], 201);
     }
 
     /**
