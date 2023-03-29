@@ -14,7 +14,8 @@ class FlightdataController extends Controller
      */
     public function index()
     {
-        //
+        $flightdata = Flightdata::all();
+        return response()->json($flightdata);
     }
 
     /**
