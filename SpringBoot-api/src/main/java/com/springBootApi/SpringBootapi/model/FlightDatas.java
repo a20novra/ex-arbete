@@ -3,11 +3,11 @@ package com.springBootApi.SpringBootapi.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "flightdata")
-public class FlightData {
+@Table(name = "flightdatas")
+public class FlightDatas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String airline;
 
