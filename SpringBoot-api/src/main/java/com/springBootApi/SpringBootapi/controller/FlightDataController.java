@@ -24,7 +24,7 @@ public class FlightDataController {
     }
 
     @GetMapping("/flightdata/{id}")
-    public FlightDatas getFlightDataById(@PathVariable Integer id) {
+    public FlightDatas getFlightDataById(@PathVariable Long id) {
         return flightDataRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("FlightData", "id", id));
     }

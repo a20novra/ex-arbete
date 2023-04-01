@@ -7,26 +7,13 @@ import jakarta.persistence.*;
 public class FlightDatas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    private Long id;
     private String airline;
-
-    @Column(name = "airlineId")
-    private Integer airlineId;
-
-    @Column(name = "sourceAirport")
+    private Long airlineId;
     private String sourceAirport;
-
-    @Column(name = "sourceAirportId")
-    private Integer sourceAirportId;
-
-    @Column(name = "destinationAirport")
+    private Long sourceAirportId;
     private String destinationAirport;
-
-    @Column(name = "destinationAirportId")
-    private Integer destinationAirportId;
-
-    private Integer stops;
-
+    private Long destinationAirportId;
+    private Long stops;
     private String equipment;
 }
