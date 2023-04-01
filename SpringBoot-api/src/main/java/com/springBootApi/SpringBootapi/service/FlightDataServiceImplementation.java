@@ -25,4 +25,8 @@ public class FlightDataServiceImplementation  implements FlightDataService{
         return flightDataRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("FlightData", "id", id));
     }
+    @Override
+    public FlightDatas createFlightData(FlightDatas flightData){
+        return flightDataRepository.save(flightData);
+    }
 }
