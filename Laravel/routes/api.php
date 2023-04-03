@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FlightdataController;
+use Fruitcake\Cors\HandleCors;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware([HandleCors::class])->group(function () {
+    Route::get('/flightdata/{id}', [FlightdataController::class, 'show']);
+    Route::get('/flightdata', [FlightdataController::class, 'index']);
+    Route::post('/flightdata/store', [FlightdataController::class, 'store']);
 
-Route::get('/flightdata/{id}', [FlightdataController::class, 'show']);
-Route::get('/flightdata', [FlightdataController::class, 'index']);
-Route::post('/flightdata/store', [FlightdataController::class, 'store']);
+});
+
