@@ -76,7 +76,7 @@ class FlightdataController extends Controller
     public function show($id)
     {
         try {
-            $flightdata = Flightdata::findOrFail($id);
+            $flightdata = Flightdata::find($id);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'message' => 'Record not found'
