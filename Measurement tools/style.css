@@ -1,0 +1,92 @@
+body {
+    background: linear-gradient(to bottom right, #4f215a, #043348);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .inputBox {
+    width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+  }
+  
+  .inputBox h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .inputBox label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .inputBox input[type="number"],
+  .inputBox input[type="text"] {
+    width: 71%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .inputBox select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .inputBox input[type="button"] {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .inputBox input[type="button"]:hover {
+    background: #3e8e41;
+  }
+  
+  #loadBox,
+  #downloadBox {
+    width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+#outputBox {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding: 20px;
+    margin-left: 1rem;
+    width: 820px;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    height: 500px;
+    overflow-y: auto;
+}
+  
