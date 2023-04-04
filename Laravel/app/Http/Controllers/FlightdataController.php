@@ -64,7 +64,7 @@ class FlightdataController extends Controller
         $flightdata->save();
 
         // Return a response indicating success
-        return response()->json(['message' => 'Flight data saved successfully'], 201);
+        return response()->json($flightdata, 201);
     }
 
     /**
