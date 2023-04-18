@@ -27,6 +27,33 @@ public class FlightDataServiceImplementation  implements FlightDataService{
     }
     @Override
     public FlightDatas createFlightData(FlightDatas flightData){
+        // Validate data
+        if (flightData.getAirline_iata_code() == null || flightData.getAirline_iata_code().isEmpty() || flightData.getAirline_iata_code().length() > 3){
+            throw new IllegalArgumentException("Invalid airline IATA code");
+        }
+        if (flightData.getAirline_id() == null || flightData.getAirline_id() <= 0){
+            throw new IllegalArgumentException("Invalid airline ID");
+        }
+        if (flightData.getSource_airport_iata_code() == null || flightData.getSource_airport_iata_code().isEmpty() || flightData.getSource_airport_iata_code().length() > 4){
+            throw new IllegalArgumentException("Invalid source airport IATA code");
+        }
+        if (flightData.getSource_airport_id() == null || flightData.getSource_airport_id() <= 0){
+            throw new IllegalArgumentException("Invalid source airport ID");
+        }
+        if (flightData.getDestination_airport_iata_code() == null || flightData.getDestination_airport_iata_code().isEmpty() || flightData.getDestination_airport_iata_code().length() > 4){
+            throw new IllegalArgumentException("Invalid destination airport IATA code");
+        }
+        if (flightData.getDestination_airport_id() == null || flightData.getDestination_airport_id() <= 0){
+            throw new IllegalArgumentException("Invalid destination airport ID");
+        }
+        if (flightData.getNumber_of_stops() == null || flightData.getNumber_of_stops() < 0){
+            throw new IllegalArgumentException("Invalid number of stops");
+        }
+        if (flightData.getEquipment() == null || flightData.getEquipment().isEmpty() || flightData.getEquipment().length() > 32){
+            throw new IllegalArgumentException("Invalid equipment");
+        }
+
         return flightDataRepository.save(flightData);
     }
+    
 }
