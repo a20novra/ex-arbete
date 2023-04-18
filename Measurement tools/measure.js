@@ -32,6 +32,7 @@ function postButton() {
 
         $("#loadBox").text(i + "/" + numIterations);
         post(data[idOfRecord]);
+        localStorage.setItem('index', index+1);
         }
     });
 };
