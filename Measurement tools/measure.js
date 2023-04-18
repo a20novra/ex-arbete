@@ -23,7 +23,7 @@ function postButton() {
     fetch("./flightdata.json")
     .then(response => response.json())
     .then(data => {
-        for (let i = 0; i <= numIterations; i++) {
+        for (let i = 0; i <= numIterations-1; i++) {
         let index = parseInt(localStorage.getItem('index'));
         //Controll random number
         Math.setSeed(index);
@@ -87,7 +87,7 @@ function getButton(){
     localStorage.setItem('index',3);
     
 
-    for(let i = 0; i <= numIterations; i++){
+    for(let i = 0; i <= numIterations-1; i++){
         let index = parseInt(localStorage.getItem('index'));
         //Controll random number
         Math.setSeed(index);
