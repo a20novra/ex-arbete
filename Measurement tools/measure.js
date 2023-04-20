@@ -30,7 +30,7 @@ function postButton() {
 
         let idOfRecord = Math.floor(Math.random()* index)+1;
 
-        $("#loadBox").text(i + "/" + numIterations+1);
+        $("#loadBox").text(i+1 + "/" + numIterations);
         post(data[idOfRecord]);
         localStorage.setItem('index', index+1);
         }
@@ -113,7 +113,7 @@ function getButton(){
             getData();
         })
         // .catch(error => console.log('error', error));
-        $("#loadBox").text(i + "/" + numIterations+1);
+        $("#loadBox").text(i+1 + "/" + numIterations);
         localStorage.setItem('index', index+1);
     }        
 
