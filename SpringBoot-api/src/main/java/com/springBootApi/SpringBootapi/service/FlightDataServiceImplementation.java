@@ -55,5 +55,5 @@ public class FlightDataServiceImplementation  implements FlightDataService{
 
         return flightDataRepository.save(flightData);
     }
-    
+
 }
