@@ -1,13 +1,11 @@
 // Variables for measuring request time
 let csvString;
-let requestStartTime;
-let requestEndTime;
 
 // Variables for choosing REST API endpoint and number of iterations
 let restEndpoint;
 let numIterations;
 
-function postButton() {
+async function postButton() {
     // Clear output box and initialize CSV string
     $("#outputBox").text("");
     csvString = "data:text/csv;charset=utf-8,time,\n";
@@ -20,10 +18,10 @@ function postButton() {
     localStorage.setItem('index',3);
 
     // Get flight data JSON file
-    fetch("./flightdata.json")
-    .then(response => response.json())
-    .then(data => {
-        for (let i = 0; i <= numIterations-1; i++) {
+    const response = await fetch("./flightdata.json");
+    const data = await response.json();
+  
+    for (let i = 0; i < numIterations; i++) {
         let index = parseInt(localStorage.getItem('index'));
         //Controll random number
         Math.setSeed(index);
@@ -31,17 +29,18 @@ function postButton() {
         let idOfRecord = Math.floor(Math.random()* index)+1;
 
         $("#loadBox").text(i+1 + "/" + numIterations);
-        post(data[idOfRecord]);
+
+        await post(data[idOfRecord]);
+
         localStorage.setItem('index', index+1);
-        }
-    });
+    }
 };
 
 // Send a HTTP request to the chosen REST API with the provided JSON data
 // Save the time it takes to send the request and get a response from the REST API
-function post(jsonData) {
-    requestStartTime = performance.now();
-    fetch(restEndpoint, {
+async function post(jsonData) {
+    let requestStartTime =  new Date().getTime();
+    await fetch(restEndpoint, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -49,18 +48,17 @@ function post(jsonData) {
         body: JSON.stringify(jsonData)
     })
     .then(response => {
-        requestEndTime = performance.now();
         return response.text();
     })
     .then(responseText => {
+        let requestEndTime =  new Date().getTime();
         const data = JSON.parse(responseText);
         const formattedJSON = JSON.stringify(data, null, 2);
         $("<pre>" + formattedJSON + "</pre>").appendTo("#outputBox");
         // Calculates the time it took to send the request and get a response from the REST api
-        let delta = (requestEndTime - requestStartTime).toFixed(2);
+        let delta = (requestEndTime - requestStartTime);
         csvString += delta + ",\n";
         getData();
-        
     });
 };
 
@@ -75,7 +73,7 @@ function getData() {
     $( "#downloadBox" ).append(downloadAnchor);
 };
 
-function getButton(){
+async function getButton(){
     $("#outputBox").text("");
     csvString = "data:text/csv;charset=utf-8,time,param,results,\n";
 
@@ -86,29 +84,28 @@ function getButton(){
     //create lockal storage
     localStorage.setItem('index',3);
     
-
     for(let i = 0; i <= numIterations-1; i++){
         let index = parseInt(localStorage.getItem('index'));
         //Controll random number
         Math.setSeed(index);
 
         let idOfRecord = Math.floor(Math.random()* index)+1;
-        requestStartTime = performance.now();
+        let requestStartTime =  new Date().getTime();
 
-        fetch(restEndpoint+"/"+idOfRecord, {
+        await fetch(restEndpoint+"/"+idOfRecord, {
             method: 'GET',
             redirect: 'follow'
         })
         .then(response => {
-            requestEndTime = performance.now();
             return response.text();
         })
         .then(text => {
+            let requestEndTime =  new Date().getTime();
             const data = JSON.parse(text);
             const formattedJSON = JSON.stringify(data, null, 2);
             $("<pre>" + formattedJSON + "</pre>").appendTo("#outputBox");
             // Calculates the time it took to send the request and get a response from the REST api
-            let delta = (requestEndTime - requestStartTime).toFixed(2);
+            let delta = (requestEndTime - requestStartTime);
             csvString += delta + ",\n";
             getData();
         })
@@ -133,13 +130,13 @@ function getAllButton(){
 // Saves the time it takes to send the request and get a response from the REST api
 function getAll(){
     csvString = "data:text/csv;charset=utf-8,time,\n";
-    requestStartTime = performance.now();
+    requestStartTime =  new Date().getTime();
 
     fetch(restEndpoint, {
         method: 'GET'
     })
     .then(response => {
-        requestEndTime = performance.now();
+        let requestEndTime =  new Date().getTime();
         return response.text();
     })
     .then(text => {
@@ -147,7 +144,7 @@ function getAll(){
         const formattedJSON = JSON.stringify(data, null, 2);
         $("<pre>" + formattedJSON + "</pre>").appendTo("#outputBox");
         // Calculates the time it took to send the request and get a response from the REST api
-        let delta = (requestEndTime - requestStartTime).toFixed(2);
+        let delta = (requestEndTime - requestStartTime);
         csvString += delta + ",\n";
         getData();
 
